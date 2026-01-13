@@ -1,0 +1,45 @@
+class Solution {
+    public ListNode reverseEvenLengthGroups(ListNode head) {
+        ListNode curr = head;
+        int len = 0;
+        int groupSize = 1;
+        while(curr != null){
+            len++;
+            curr = curr.next;
+        }
+        curr = head;
+        ListNode p = null;
+
+        while(curr != null){
+        int actuallSize = Math.min(groupSize,len);
+
+        if(actuallSize % 2 == 0){
+            ListNode prev = null;
+            int count = 0;
+            ListNode temp = curr;
+
+
+            while(count < actuallSize){
+                count++;
+                ListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            p.next = prev;
+            temp.next = curr;
+            p = temp;
+        }else{
+            int count = 0;
+             while(count < actuallSize){
+                count++;
+                p = curr;
+                curr = curr.next;
+            }
+        }
+        groupSize++;
+        len = len - actuallSize;
+    }
+    return head;
+}
+}
